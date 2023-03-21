@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  descripton: MyText
+  duration: 1
+  goal: one
+
+two:
+  name: MyString
+  descripton: MyText
+  duration: 1
+  goal: two

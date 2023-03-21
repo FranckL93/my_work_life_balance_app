@@ -1,0 +1,25 @@
+<h1>Profile</h1>
+
+<p><strong>Email:</strong> <%= @user.email %></p>
+
+<h2>Goals</h2>
+<% if @user.goals.any? %>
+  <ul>
+    <% @user.goals.each do |goal| %>
+      <li><%= goal.title %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No goals yet.</p>
+<% end %>
+
+<h2>Activities</h2>
+<% if @user.activities.any? %>
+  <ul>
+    <% @user.activities.each do |activity| %>
+      <li><%= activity.title %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No activities yet.</p>
+<% end %>
