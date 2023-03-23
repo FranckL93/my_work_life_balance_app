@@ -10,15 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_21_142956) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_23_100556) do
   create_table "activities", force: :cascade do |t|
     t.string "name"
-    t.text "descripton"
+    t.text "description"
     t.integer "duration"
     t.integer "goal_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "user_id", null: false
     t.index ["goal_id"], name: "index_activities_on_goal_id"
+    t.index ["user_id"], name: "index_activities_on_user_id"
   end
 
   create_table "communities", force: :cascade do |t|
@@ -46,6 +48,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_21_142956) do
     t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "status"
     t.index ["user_id"], name: "index_goals_on_user_id"
   end
 
@@ -69,6 +72,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_21_142956) do
   end
 
   add_foreign_key "activities", "goals"
+  add_foreign_key "activities", "users"
   add_foreign_key "communities", "users"
   add_foreign_key "community_memberships", "communities"
   add_foreign_key "community_memberships", "users"
