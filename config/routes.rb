@@ -4,8 +4,7 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "articles#index"
 
-  # User routes
-  resources :users
+  devise_for :users
 
   # Goal routes nested under user
   resources :users do

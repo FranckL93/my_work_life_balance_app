@@ -1,0 +1,19 @@
+<h1>Edit Goal</h1>
+
+<%= form_with model: @goal, url: goal_path(@goal), method: :patch do |form| %>
+  <%= form.label :name %>
+  <%= form.text_field :name %>
+
+  <%= form.label :description %>
+  <%= form.text_area :description %>
+
+  <%= form.label :deadline %>
+  <%= form.datetime_select :deadline %>
+
+  <%= form.label :status %>
+  <%= form.select :status, options_for_select([['Not started', 'not_started'], ['In progress', 'in_progress'], ['Completed', 'completed']], @goal.status) %>
+
+  <%= form.submit %>
+<% end %>
+
+<p><%= link_to 'Back', goals_path %></p>

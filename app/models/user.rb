@@ -1,8 +1,10 @@
 class User < ApplicationRecord
-  has_secure_password
-  validates :name, presence: true
-  validates :email, presence: true, uniqueness: true
 
-  has_many :goals
-  has_many :activities
+  has_many :goals, dependent: :destroy
+  has_many :activities, through: :goals
+  has_many :reminders, through: :goals
+
+  # has_secure_password
+
+  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable
 end

@@ -37,6 +37,7 @@
 # activity2 = goal2.activities.create!(name: "Groceries", description: "Bought some chicken, nuts and curry")
 
 # puts 'Finished!'
+ActiveRecord::Base.connection.execute("PRAGMA foreign_keys = OFF")
 
 puts "Cleaning database..."
 User.destroy_all
@@ -46,50 +47,51 @@ CommunityMembership.destroy_all
 Activity.destroy_all
 
 puts 'Creating users...'
-user1 = User.create(name: "John Doe", email: "johndoe@example.com", password_digest: "password")
-user1.save!
+
+user1 = User.create!(name: "John Doe", email: "johndoe@example.com", password_digest: "password")
 puts "User1 created with ID: #{user1.id}"
-user2 = User.create(name: "Jane Doe", email: "janedoe@example.com", password_digest: "password")
-user2.save!
+user2 = User.create!(name: "Jane Doe", email: "janedoe@example.com", password_digest: "password")
 puts "User2 created with ID: #{user2.id}"
 
 puts 'Creating communities...'
-community1 = Community.create(name: "Fitness Group", description: "A group for fitness enthusiasts", user: user1)
-community1.save!
+community1 = Community.create!(name: "Fitness Group", description: "A group for fitness enthusiasts", user: user1)
+
 puts "Community1 created with ID: #{community1.id}"
-community2 = Community.create(name: "Cooking Club", description: "A club for food lovers", user: user2)
-community2.save!
+community2 = Community.create!(name: "Cooking Club", description: "A club for food lovers", user: user2)
+
 puts "Community2 created with ID: #{community2.id}"
 
 puts 'Creating goals...'
-goal1 = Goal.create(
+goal1 = Goal.create!(
   name: "Run 5 miles",
   description: "Run 5 miles without stopping",
   user: user1,
   deadline: Date.new(2023, 6, 30),
   status: "In progress"
 )
-goal1.save!
-goal2 = Goal.create(
+
+goal2 = Goal.create!(
   name: "Learn to cook Thai food",
   description: "Learn to cook pad thai and green curry",
   user: user2,
   deadline: Date.new(2023, 4, 30),
   status: "Not started"
 )
-goal2.save!
+
 puts "Goal2 created with ID: #{goal2.id} and user ID: #{goal2.user.id}"
 
 puts 'Adding users to communities...'
-CommunityMembership.create(user: user1, community: community1)
-CommunityMembership.create(user: user2, community: community2)
+CommunityMembership.create!(user: user1, community: community1)
+CommunityMembership.create!(user: user2, community: community2)
 
 puts 'Creating activities...'
-activity1 = Activity.create(name: "Morning run", description: "Ran 3 miles in the morning", goal: goal1)
-activity1.save!
+activity1 = Activity.create!(name: "Morning run", description: "Ran 3 miles in the morning", goal: goal1)
+
 puts "Activity1 created with ID: #{activity1.id} and goal ID: #{activity1.goal.id}"
-activity2 = Activity.create(name: "Groceries", description: "Bought some chicken, nuts and curry", goal: goal2)
-activity2.save!
+activity2 = Activity.create!(name: "Groceries", description: "Bought some chicken, nuts and curry", goal: goal2)
+
 puts "Activity2 created with ID: #{activity2.id} and goal ID: #{activity2.goal.id}"
 
 puts 'Finished!'
+
+ActiveRecord::Base.connection.execute("PRAGMA foreign_keys = ON")
